@@ -22,11 +22,37 @@ DrawingContext::DrawingContext(Surface* surface, anti_alias_t antiAlias)
             cairo_set_antialias(this->cr, CAIRO_ANTIALIAS_BEST);
             break;
     }
+
+    this->refWidth  = 800;
+    this->refHeight = 450;
+    this->scalingMode = SCALING_WITH_REFERENCE;
+}
+
+void DrawingContext::setReferenceResolution(int width, int height)
+{
+    this->refWidth  = (double)width;
+    this->refHeight = (double)height;
+}
+
+void DrawingContext::setScalingMode(scaling_t scalingMode)
+{
+    this->scalingMode = scalingMode;
+}
+
+double DrawingContext::scale(double value)
+{
+    if (this->scalingMode == SCALING_NONE) return value;
+    
+    // When scaling between resolutions with the same aspect ratio
+    // width and height have the same proportions against the
+    // reference. Width used for the calculation.
+    double multiplier = this->width / this->refWidth;
+    return value * multiplier;
 }
 
 void DrawingContext::setLineWidth(double lineWidth)
 {
-    cairo_set_line_width (this->cr, lineWidth);
+    cairo_set_line_width (this->cr, scale(lineWidth));
 }
 
 void DrawingContext::setSourceRgb(double r, double g, double b)
@@ -46,12 +72,12 @@ void DrawingContext::paint(void)
 
 void DrawingContext::moveTo(double x, double y)
 {
-    cairo_move_to(this->cr, x, y);
+    cairo_move_to(this->cr, scale(x), scale(y));
 }
 
 void DrawingContext::lineTo(double x, double y)
 {
-    cairo_line_to(this->cr, x, y);
+    cairo_line_to(this->cr, scale(x), scale(y));
 }
 
 void DrawingContext::closePath()
@@ -61,7 +87,7 @@ void DrawingContext::closePath()
 
 void DrawingContext::arc(double xc, double yc, double radius, double angle1, double angle2)
 {
-    cairo_arc(this->cr, xc, yc, radius, angle1, angle2);
+    cairo_arc(this->cr, scale(xc), scale(yc), scale(radius), angle1, angle2);
 }
 
 void DrawingContext::stroke()
@@ -77,6 +103,6 @@ void DrawingContext::fill()
 
 void DrawingContext::rectangle(double x, double y, double width, double height)
 {
-    cairo_rectangle(this->cr, x, y, width, height);
+    cairo_rectangle(this->cr, scale(x), scale(y), scale(width), scale(height));
 }
 

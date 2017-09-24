@@ -8,7 +8,11 @@ const double PI = 3.14159265359;
 
 int main(int argc, char* argv[])
 {
-    ImageSurface*   imageSurface   = new ImageSurface(640,480);
+    //ImageSurface*   imageSurface   = new ImageSurface(800,450);
+    //ImageSurface*   imageSurface   = new ImageSurface(1920,1080);
+    //ImageSurface*   imageSurface   = new ImageSurface(1920,1080);
+    ImageSurface*   imageSurface   = new ImageSurface(7680,4320);
+
     DrawingContext* dc             = new DrawingContext((Surface*)imageSurface, ANTI_ALIAS_BEST);
 
     dc->setSourceRgb(0.1,0,0.1);
@@ -20,7 +24,7 @@ int main(int argc, char* argv[])
     dc->setLineWidth(1);
     dc->moveTo(300,100);
     dc->lineTo(300,150);
-    dc->lineTo(600,300);
+    dc->lineTo(800,300);
     dc->closePath();
     dc->stroke();
 

@@ -12,10 +12,20 @@ typedef enum
     ANTI_ALIAS_BEST,
 } anti_alias_t;
 
+typedef enum
+{
+    SCALING_NONE,
+    SCALING_WITH_REFERENCE,
+} scaling_t;
+
 class DrawingContext
 {
 public:
     DrawingContext(Surface* surface, anti_alias_t antiAlias);
+
+    // Variable surface resolution with the same coordinates as input
+    void setReferenceResolution(int width, int height);
+    void setScalingMode(scaling_t scalingMode);
 
     // Configuration
     void setLineWidth(double lineWidth);
@@ -38,10 +48,15 @@ public:
     void rectangle(double x, double y, double width, double height);
 
 private:
-    int width;
-    int height;
 
-    cairo_t* cr;
+    double scale(double value);
+
+    double       width;
+    double       height;
+    double       refWidth;
+    double       refHeight;
+    scaling_t scalingMode;
+    cairo_t*  cr;
 };
 
 #endif /* _DRAWING_CONTEXT_H_ */
