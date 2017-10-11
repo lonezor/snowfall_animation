@@ -23,8 +23,8 @@ DrawingContext::DrawingContext(Surface* surface, anti_alias_t antiAlias)
             break;
     }
 
-    this->refWidth  = 800;
-    this->refHeight = 450;
+    this->refWidth  = 1920;
+    this->refHeight = 1080;
     this->scalingMode = SCALING_WITH_REFERENCE;
 }
 

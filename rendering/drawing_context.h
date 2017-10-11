@@ -43,18 +43,16 @@ public:
     void fill(void);
     void stroke(void);
     
-
     // Simple Shapes
     void rectangle(double x, double y, double width, double height);
 
 private:
-
     double scale(double value);
 
-    double       width;
-    double       height;
-    double       refWidth;
-    double       refHeight;
+    double    width;
+    double    height;
+    double    refWidth;
+    double    refHeight;
     scaling_t scalingMode;
     cairo_t*  cr;
 };
