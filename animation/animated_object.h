@@ -8,7 +8,7 @@ class AnimatedObject // Defines how a object is animated in time
 public:
     virtual ~AnimatedObject() {};
 
-    virtual void drawNextFrame(DrawingContext* dc) = 0;
+    virtual void drawNextFrame() = 0;
 
 };
 

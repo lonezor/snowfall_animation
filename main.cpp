@@ -7,7 +7,7 @@
 #include "drawing_context.h"
 #include "snowflake.h"
 
-#define NR_FRAMES (5000)
+#define NR_FRAMES (60*60*3)
 
 #define MAX_NR_SNOWFLAKES (10000)
 
@@ -18,7 +18,8 @@ int main(int argc, char* argv[])
     int i,j;
     int frameIdx;
     int frameNr = 0;
-    ImageSurface*   imageSurface   = new ImageSurface(1920,1080);
+    //ImageSurface*   imageSurface   = new ImageSurface(1920,1080);
+    ImageSurface*   imageSurface   = new ImageSurface(3840,2160);
     //ImageSurface*   imageSurface   = new ImageSurface(7680,4320);
     char fileName[100];
     
@@ -43,7 +44,7 @@ int main(int argc, char* argv[])
             {
                 if (!snowflakes[j])
                 {
-                    snowflakes[j] = new Snowflake();
+                    snowflakes[j] = new Snowflake(dc);
                     break;
                 }
             }
@@ -55,7 +56,7 @@ int main(int argc, char* argv[])
           {
             if (snowflakes[i]->onScreen()) 
             {
-              snowflakes[i]->drawNextFrame(dc);
+              snowflakes[i]->drawNextFrame();
             }
             else
             {
@@ -72,14 +73,7 @@ int main(int argc, char* argv[])
       
     }
 
-
-
-
-
-    
-
     delete imageSurface;
     delete dc;
-
     return 0;
 }

@@ -7,16 +7,18 @@
 class Snowflake : AnimatedObject // At the moment, a snowflake is an animated circle
 {
 public:
-    Snowflake();
+    Snowflake(DrawingContext* dc);
 
     bool onScreen();
-    void drawNextFrame(DrawingContext* dc);
+    void drawNextFrame();
 
 private:
     double xVelocity; // Wind and air turbulence
     double yVelocity; // Gravity and air resistance
     double size;      // Diameter
+    double xDiff;     // Horizontal randomness
     Circle* object;
+    DrawingContext* dc;
 };
 
 

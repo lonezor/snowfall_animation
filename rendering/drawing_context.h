@@ -23,6 +23,9 @@ class DrawingContext
 public:
     DrawingContext(Surface* surface, anti_alias_t antiAlias);
 
+    double getScreenWidth();
+    double getScreenHeight();
+
     // Variable surface resolution with the same coordinates as input
     void setReferenceResolution(int width, int height);
     void setScalingMode(scaling_t scalingMode);

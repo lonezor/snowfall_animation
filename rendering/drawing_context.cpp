@@ -28,6 +28,16 @@ DrawingContext::DrawingContext(Surface* surface, anti_alias_t antiAlias)
     this->scalingMode = SCALING_WITH_REFERENCE;
 }
 
+double DrawingContext::getScreenWidth()
+{
+    return this->width;
+}
+
+double DrawingContext::getScreenHeight()
+{
+    return this->height;
+}
+
 void DrawingContext::setReferenceResolution(int width, int height)
 {
     this->refWidth  = (double)width;
