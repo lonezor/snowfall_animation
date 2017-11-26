@@ -70,6 +70,12 @@ void DrawingContext::paint(void)
     cairo_paint(this->cr);
 }
 
+void DrawingContext::clear(void)
+{
+    cairo_set_source_rgb(this->cr, 0, 0, 0);
+    cairo_paint(this->cr);
+}
+
 void DrawingContext::moveTo(double x, double y)
 {
     cairo_move_to(this->cr, scale(x), scale(y));

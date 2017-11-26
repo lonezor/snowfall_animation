@@ -13,6 +13,12 @@ double getWidth(void);
 double getHeight(void);
 void   setRgb(double r, double g, double b);
 void   setRgba(double r, double g, double b, double a);
+void   setX(double x);
+void   setY(double y);
+void   incX(double amount);
+void   incY(double amount);
+void   decX(double amount);
+void   decY(double amount);
 void randomCoordinates(double width, double height);
 void randomColor(void);
 void randomTransparency(void);
@@ -22,7 +28,7 @@ virtual bool collision(Object& other); // This class checks using bounding box
 
 virtual void randomSize(double start, double end);
 
-virtual void draw(DrawingContext* dc);
+virtual void draw(DrawingContext* dc) = 0;
 
 protected:
     double r;

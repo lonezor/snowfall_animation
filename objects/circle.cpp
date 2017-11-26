@@ -21,7 +21,7 @@ void Circle::setFilled(bool flag)
     this->filled = flag;
 }
 
-void Circle::randomSize(double start, double end)
+void Circle::randomSize(double start, double end) // Implements Object::randomSize()
 {
     double r     = drand48();
     double range = end - start;
@@ -33,7 +33,7 @@ void Circle::randomSize(double start, double end)
     this->height = r;
 }
 
-void Circle::draw(DrawingContext* dc)
+void Circle::draw(DrawingContext* dc) // Implements Object::draw()
 {
     dc->setSourceRgb(this->r, this->g, this->b);
     dc->arc(this->x, this->y, this->radius, 0, 2 * PI);

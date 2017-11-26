@@ -46,6 +46,8 @@ public:
     // Simple Shapes
     void rectangle(double x, double y, double width, double height);
 
+    void clear(void);
+
 private:
     double scale(double value);
 

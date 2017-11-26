@@ -17,6 +17,36 @@ double Object::getY()
     return this->y;
 }
 
+void Object::setX(double x)
+{
+    this->x = x;
+}
+
+void Object::setY(double y)
+{
+    this->y = y;
+}
+
+void Object::incX(double amount)
+{
+    this->x += amount;
+}
+
+void Object::decX(double amount)
+{
+    this->x -= amount;
+}
+
+void Object::incY(double amount)
+{
+    this->y += amount;
+}
+
+void Object::decY(double amount)
+{
+    this->y -= amount;
+}
+
 double Object::getWidth()
 {
     return this->width;
