@@ -2,12 +2,13 @@
 #define _SNOWFLAKE_H_
 
 #include "animated_object.h"
+#include "wind.h"
 #include "circle.h"
 
 class Snowflake : AnimatedObject // At the moment, a snowflake is an animated circle
 {
 public:
-    Snowflake(DrawingContext* dc);
+    Snowflake(DrawingContext* dc, Wind* wind);
 
     bool onScreen();
     void drawNextFrame();
@@ -19,6 +20,7 @@ private:
     double xDiff;     // Horizontal randomness
     Circle* object;
     DrawingContext* dc;
+    Wind* wind;
 };
 
 

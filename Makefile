@@ -1,5 +1,5 @@
 CXX=g++
-CFLAGS=-Wall -g3 -O3 `pkg-config --cflags cairo` -Irendering -Iobjects -Ianimation
+CFLAGS=-Wall -g3 -O3 `pkg-config --cflags cairo` -I. -Irendering -Iobjects -Ianimation
 LIBS=`pkg-config --libs cairo`
 
 all:
