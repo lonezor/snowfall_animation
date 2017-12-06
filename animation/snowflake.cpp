@@ -28,7 +28,7 @@ Snowflake::Snowflake(DrawingContext* dc, Wind* wind)
 
     // Randomize horizontal speed. The majority of flakes towards the right.
     // Also, add randomization during animation with xDiff which may also change direction
-    this->xVelocity = drand48() * 2;
+    this->xVelocity = drand48() * 1.0;
     if (drand48() < 0.1) this->xVelocity *= -1;
     this->xDiff = drand48() / 1024; // make horizontal animation look random instead of contant value.
                                   // the direction is later changed randomy as well.

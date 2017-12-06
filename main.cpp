@@ -25,10 +25,22 @@ int main(int argc, char* argv[])
     //ImageSurface*   imageSurface   = new ImageSurface(3840,2160);
     //ImageSurface*   imageSurface   = new ImageSurface(7680,4320);
     char fileName[100];
-    
+  
+
     DrawingContext* dc = new DrawingContext((Surface*)imageSurface, ANTI_ALIAS_BEST);
-    //Wind* wind = new Wind(10, 30, 3, 10, 2, 10, 5,60,4,20);
-    Wind* wind = new Wind(5, 7, 1, 4, 0.050, 0.100, 2,10,1,4);
+    Wind* wind = new Wind(DEFAULT_MIN_IDLE_TIME,
+                          DEFAULT_MAX_IDLE_TIME,
+                          DEFAULT_MIN_ACCELERATION_TIME,
+                          DEFAULT_MAX_ACCELERATION_TIME,
+                          DEFAULT_MIN_STRENGTH,
+                          DEFAULT_MAX_STRENGTH,
+                          DEFAULT_MIN_DURATION_TIME,
+                          DEFAULT_MAX_DURATION_TIME,
+                          DEFAULT_MIN_DEACCELERATION_TIME,
+                          DEFAULT_MAX_DEACCELERATION_TIME);
+    
+
+    // to long wind duration!!!
     
     memset(snowflakes, 0, sizeof(snowflakes));
  

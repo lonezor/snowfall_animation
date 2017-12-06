@@ -10,6 +10,17 @@ typedef enum
     WIND_STATE_DEACCELERATION,
 } windState_t;
 
+#define DEFAULT_MIN_IDLE_TIME           (5)
+#define DEFAULT_MAX_IDLE_TIME           (10.0)
+#define DEFAULT_MIN_ACCELERATION_TIME   (0.2)
+#define DEFAULT_MAX_ACCELERATION_TIME   (0.7)
+#define DEFAULT_MIN_STRENGTH            (0.020)
+#define DEFAULT_MAX_STRENGTH            (0.070)
+#define DEFAULT_MIN_DURATION_TIME       (0.1)
+#define DEFAULT_MAX_DURATION_TIME       (0.5)
+#define DEFAULT_MIN_DEACCELERATION_TIME (0.2)
+#define DEFAULT_MAX_DEACCELERATION_TIME (0.7)
+
 class Wind
 {
 public:

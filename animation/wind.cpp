@@ -95,6 +95,7 @@ void Wind::nextFrame()
                 this->xDiff = (this->elapsedAccelerationTime / this->accelerationTime) * this->strength;
                 this->xDiff *= this->direction;
                 this->yDiff = this->xDiff / 2;
+                if (this->yDiff < 0) this->yDiff *= -1;
             }
             break;
         case WIND_STATE_FULL_STRENGTH:
@@ -119,6 +120,7 @@ void Wind::nextFrame()
                 this->xDiff = (1-(this->elapsedDeaccelerationTime / this->deaccelerationTime)) * this->strength;
                 this->xDiff *= this->direction;
                 this->yDiff = this->xDiff / 2;
+                if (this->yDiff < 0) this->yDiff *= -1;
             }
             break;
         default:
