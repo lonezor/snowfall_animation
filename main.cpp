@@ -9,21 +9,30 @@
 #include "wind.h"
 #include "config.h"
 
-#define NR_FRAMES (FRAME_RATE*60*3)
-#define NR_DRY_RUN_FRAMES (FRAME_RATE*60)
-
+#define NR_FRAMES         (FRAME_RATE*60*3)
 #define MAX_NR_SNOWFLAKES (10000)
+#define IMAGE_WIDTH_2K    (1920)
+#define IMAGE_HEIGHT_2K   (1080)
+#define IMAGE_WIDTH_4K    (3840)
+#define IMAGE_HEIGHT_4K   (2160)
+#define IMAGE_WIDTH_8K    (7680)
+#define IMAGE_HEIGHT_8K   (4320)
 
 static Snowflake* snowflakes[MAX_NR_SNOWFLAKES] = {0};
+
+// Video encoding command: ffmpeg -r 60 -f image2 -s 1920x1080 -i out_%06d.png -vcodec libx264 -crf 25  -pix_fmt yuv420p test.mp4
 
 int main(int argc, char* argv[])
 {
     int i,j;
     int frameIdx;
     int frameNr = 0;
-    ImageSurface*   imageSurface   = new ImageSurface(1920,1080);
-    //ImageSurface*   imageSurface   = new ImageSurface(3840,2160);
-    //ImageSurface*   imageSurface   = new ImageSurface(7680,4320);
+
+    // The graphics backend automatically scale for any resolution,
+    // although the same aspect ratio should be used.
+    ImageSurface*   imageSurface   = new ImageSurface(IMAGE_WIDTH_2K,IMAGE_HEIGHT_2K);
+    //ImageSurface*   imageSurface   = new ImageSurface(IMAGE_WIDTH_4K,IMAGE_HEIGHT_4K);
+    //ImageSurface*   imageSurface   = new ImageSurface(IMAGE_WIDTH_8K,IMAGE_HEIGHT_8K);
     char fileName[100];
   
 
@@ -38,14 +47,10 @@ int main(int argc, char* argv[])
                           DEFAULT_MAX_DURATION_TIME,
                           DEFAULT_MIN_DEACCELERATION_TIME,
                           DEFAULT_MAX_DEACCELERATION_TIME);
-    
 
-    // to long wind duration!!!
-    
     memset(snowflakes, 0, sizeof(snowflakes));
  
-    // 600 frames
-    for(frameIdx=0; frameIdx < NR_DRY_RUN_FRAMES + NR_FRAMES; frameIdx++)
+    for(frameIdx=0; frameIdx < NR_FRAMES; frameIdx++)
     {
         dc->clear();
         dc->setSourceRgb(0.1,0,0.1);
@@ -85,18 +90,9 @@ int main(int argc, char* argv[])
           }
         }
 
-      //if (frameIdx >= NR_DRY_RUN_FRAMES)
-        if (1)
-      {
-        snprintf(fileName, sizeof(fileName), "/home/samba/git/png/out_%06d.png", frameNr++);
-        printf("Writing file %s\n", fileName);
-        imageSurface->writePngFile(fileName);
-      }
-      else
-      {
-        printf("Dry run frame %d\n", i);
-      }
-      
+      snprintf(fileName, sizeof(fileName), "/home/samba/git/png/out_%06d.png", frameNr++);
+      printf("Writing file %s\n", fileName);
+      imageSurface->writePngFile(fileName);
     }
 
     delete imageSurface;
