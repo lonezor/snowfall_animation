@@ -1,3 +1,21 @@
+/*
+ *  Snowfall Animation
+ *  Copyright (C) 2017 Johan Norberg <lonezor@gmail.com>
+ *
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program. If not, see <http://www.gnu.org/licenses/>
+ */
+
 #include "snowflake.h"
 
 #include <stdio.h>
@@ -8,11 +26,12 @@ Snowflake::Snowflake(DrawingContext* dc, Wind* wind)
     this->dc = dc;
     this->wind = wind;
     this->object = new Circle(200,200, 100);
-    this->object->setFilled(1);
+    this->object->setFilled(true);
+    this->object->randomAlpha(0.7,1.0);
 
     // Random coordinate above the screen
-    this->object->randomCoordinates(dc->getScreenWidth(),dc->getScreenHeight());
-    this->object->decY(dc->getScreenHeight()+100);
+    this->object->randomCoordinates(1920,1080);
+    this->object->decY(1080+100);
 
     // Randomize size. Smaller flakes are more common
     double r = drand48();
@@ -42,7 +61,7 @@ Snowflake::Snowflake(DrawingContext* dc, Wind* wind)
 bool Snowflake::onScreen()
 {
     double y = this->object->getY();
-    return ( y > -2 * dc->getScreenHeight() && y < dc->getScreenHeight() * 2);
+    return ( y > -2 * 1080 && y < 1080 * 2);
 }
 
 void Snowflake::drawNextFrame()

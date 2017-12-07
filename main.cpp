@@ -1,3 +1,21 @@
+/*
+ *  Snowfall Animation
+ *  Copyright (C) 2017 Johan Norberg <lonezor@gmail.com>
+ *
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program. If not, see <http://www.gnu.org/licenses/>
+ */
+
 #include <stdio.h>
 #include <math.h>
 #include <stdlib.h>
@@ -9,7 +27,7 @@
 #include "wind.h"
 #include "config.h"
 
-#define NR_FRAMES         (FRAME_RATE*60*3)
+#define NR_FRAMES         (FRAME_RATE * 60 * 4)
 #define MAX_NR_SNOWFLAKES (10000)
 #define IMAGE_WIDTH_2K    (1920)
 #define IMAGE_HEIGHT_2K   (1080)
@@ -27,15 +45,9 @@ int main(int argc, char* argv[])
     int i,j;
     int frameIdx;
     int frameNr = 0;
-
-    // The graphics backend automatically scale for any resolution,
-    // although the same aspect ratio should be used.
-    ImageSurface*   imageSurface   = new ImageSurface(IMAGE_WIDTH_2K,IMAGE_HEIGHT_2K);
-    //ImageSurface*   imageSurface   = new ImageSurface(IMAGE_WIDTH_4K,IMAGE_HEIGHT_4K);
-    //ImageSurface*   imageSurface   = new ImageSurface(IMAGE_WIDTH_8K,IMAGE_HEIGHT_8K);
     char fileName[100];
-  
 
+    ImageSurface*   imageSurface   = new ImageSurface(IMAGE_WIDTH_8K, IMAGE_HEIGHT_8K);
     DrawingContext* dc = new DrawingContext((Surface*)imageSurface, ANTI_ALIAS_BEST);
     Wind* wind = new Wind(DEFAULT_MIN_IDLE_TIME,
                           DEFAULT_MAX_IDLE_TIME,
@@ -60,10 +72,10 @@ int main(int argc, char* argv[])
 
         // Snow flake emitter
         double r = drand48();
-        r *= 40;
+        r *= (double)40;
         for(i=0; i<(int)r; i++)
         {
-            for(j=0; j<MAX_NR_SNOWFLAKES; j++) // Major TODO: storage of new objects and life cycle of objects
+            for(j=0; j<MAX_NR_SNOWFLAKES; j++) // TODO: improve storage of snowflakes and handle their life cycle
             {
                 if (!snowflakes[j])
                 {
@@ -90,9 +102,9 @@ int main(int argc, char* argv[])
           }
         }
 
-      snprintf(fileName, sizeof(fileName), "/home/samba/git/png/out_%06d.png", frameNr++);
-      printf("Writing file %s\n", fileName);
-      imageSurface->writePngFile(fileName);
+        snprintf(fileName, sizeof(fileName), "/home/samba/git/png/out_%06d.png", frameNr++);
+        printf("Writing file %s\n", fileName);
+        imageSurface->writePngFile(fileName);
     }
 
     delete imageSurface;
