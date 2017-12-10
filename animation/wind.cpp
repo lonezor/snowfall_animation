@@ -55,6 +55,8 @@ Wind::Wind(double minIdleTime,         double maxIdleTime,     double minAcceler
     this->xDiff                     = 0;
     this->yDiff                     = 0;
     this->direction                 = 1;
+    this->directionCounter          = 0;
+    this->directionMax              = 2;
 }
 
 double Wind::getXDiff()
@@ -85,8 +87,20 @@ void Wind::nextFrame()
                 this->yDiff                     = 0;
                 this->direction                 = 1;
 
+                double prevDirection = this->direction;
+
                 // Change wind direction.
                 if (drand48() < 0.5) this->direction *= -1;
+
+                // Prevent repetitive animation
+                if (this->direction == prevDirection) this->directionCounter++;
+
+                if (this->directionCounter > this->directionMax)
+                {
+                    printf("Forcing change of direction\n");
+                    this->direction        *= -1;
+                    this->directionCounter  = 0;
+                }
 
                 // Generate new config
                 this->idleTime           = this->minIdleTime           + (drand48()*(this->maxIdleTime           - this->minIdleTime));

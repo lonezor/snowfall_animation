@@ -33,7 +33,7 @@ typedef enum
 #define DEFAULT_MIN_ACCELERATION_TIME   (0.2)
 #define DEFAULT_MAX_ACCELERATION_TIME   (0.7)
 #define DEFAULT_MIN_STRENGTH            (0.020)
-#define DEFAULT_MAX_STRENGTH            (0.070)
+#define DEFAULT_MAX_STRENGTH            (0.090)
 #define DEFAULT_MIN_DURATION_TIME       (0.1)
 #define DEFAULT_MAX_DURATION_TIME       (0.5)
 #define DEFAULT_MIN_DEACCELERATION_TIME (0.2)
@@ -83,6 +83,8 @@ private:
     double      xDiff;
     double      yDiff;
     double      direction;
+    int         directionCounter;
+    int         directionMax;
 };
 
 #endif /* _WIND_H_ */

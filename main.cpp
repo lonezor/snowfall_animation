@@ -30,6 +30,8 @@
 //#define NR_FRAMES         (FRAME_RATE * 60 * 4)
 #define NR_FRAMES (9300)
 #define MAX_NR_SNOWFLAKES (10000)
+#define IMAGE_WIDTH_1K    (720)
+#define IMAGE_HEIGHT_1K   (405)
 #define IMAGE_WIDTH_2K    (1920)
 #define IMAGE_HEIGHT_2K   (1080)
 #define IMAGE_WIDTH_4K    (3840)
@@ -39,7 +41,9 @@
 
 static Snowflake* snowflakes[MAX_NR_SNOWFLAKES] = {0};
 
-// Video encoding command: ffmpeg -r 60 -f image2 -s 1920x1080 -i out_%06d.png -vcodec libx264 -crf 25  -pix_fmt yuv420p test.mp4
+// Video encoding commands:
+// ffmpeg -r 60 -f image2 -i out_%06d.png -crf 23 output.mp4
+// ffmpeg -i output.mp4 -i audio_155s.m4a -c:v copy -c:a copy snowfall.mp4 
 
 int main(int argc, char* argv[])
 {
