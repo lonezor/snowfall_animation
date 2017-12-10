@@ -27,7 +27,8 @@
 #include "wind.h"
 #include "config.h"
 
-#define NR_FRAMES         (FRAME_RATE * 60 * 4)
+//#define NR_FRAMES         (FRAME_RATE * 60 * 4)
+#define NR_FRAMES (9300)
 #define MAX_NR_SNOWFLAKES (10000)
 #define IMAGE_WIDTH_2K    (1920)
 #define IMAGE_HEIGHT_2K   (1080)
@@ -47,7 +48,7 @@ int main(int argc, char* argv[])
     int frameNr = 0;
     char fileName[100];
 
-    ImageSurface*   imageSurface   = new ImageSurface(IMAGE_WIDTH_8K, IMAGE_HEIGHT_8K);
+    ImageSurface*   imageSurface   = new ImageSurface(IMAGE_WIDTH_4K, IMAGE_HEIGHT_4K);
     DrawingContext* dc = new DrawingContext((Surface*)imageSurface, ANTI_ALIAS_BEST);
     Wind* wind = new Wind(DEFAULT_MIN_IDLE_TIME,
                           DEFAULT_MAX_IDLE_TIME,
@@ -65,7 +66,7 @@ int main(int argc, char* argv[])
     for(frameIdx=0; frameIdx < NR_FRAMES; frameIdx++)
     {
         dc->clear();
-        dc->setSourceRgb(0.1,0,0.1);
+        dc->setSourceRgb(0,0,0);
         dc->paint();
 
         wind->nextFrame();

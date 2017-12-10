@@ -27,7 +27,7 @@ Snowflake::Snowflake(DrawingContext* dc, Wind* wind)
     this->wind = wind;
     this->object = new Circle(200,200, 100);
     this->object->setFilled(true);
-    this->object->randomAlpha(0.7,1.0);
+    //this->object->randomAlpha(0.7,1.0);
 
     // Random coordinate above the screen
     this->object->randomCoordinates(1920,1080);

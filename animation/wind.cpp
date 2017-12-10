@@ -85,8 +85,8 @@ void Wind::nextFrame()
                 this->yDiff                     = 0;
                 this->direction                 = 1;
 
-                // Change wind direction. Most comonly to the right
-                if (drand48() < 0.4) this->direction *= -1;
+                // Change wind direction.
+                if (drand48() < 0.5) this->direction *= -1;
 
                 // Generate new config
                 this->idleTime           = this->minIdleTime           + (drand48()*(this->maxIdleTime           - this->minIdleTime));
